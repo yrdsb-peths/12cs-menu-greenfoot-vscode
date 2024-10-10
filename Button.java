@@ -1,23 +1,19 @@
 import greenfoot.*;
 
-public abstract class Button extends Actor {
-    boolean performed = false;
+public class Button extends Actor {
+    private Runnable action;
 
-    public Button() {
+    public Button(Runnable action) {
+        this.action = action;
         GreenfootImage image = new GreenfootImage("images/buttonLong_beige.png");
         setImage(image);
     }
 
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            if (!performed) {
-                performed = true;
-                perform();
+            if (action != null) {
+                action.run(); // Execute the passed action
             }
         }
-    }
-
-    public void perform() {
-        System.out.println("Hello World");
     }
 }
